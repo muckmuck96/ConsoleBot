@@ -1,1 +1,2 @@
-pipelines:greeting;Hallo,Hi,Hey,Jo-Hallo wie geht es dir?
+pipelines:greeting;hallo,hi,hey,jo-Hallo wie geht es dir?,Hey na du?,Hallo wie geht es dir heute?
+pipelines:farewell;ciao,tschö,tschüss,bye-Tschüss war nett mit dir zu reden.,Ciao bis zum nächsten mal!

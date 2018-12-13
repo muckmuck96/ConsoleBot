@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
@@ -11,25 +9,18 @@ public class Main {
         String line = "";
         FileParser fp = new FileParser("C:\\Users\\TEMP\\IdeaProjects\\Test2\\storage.test");
         while((line = br.readLine()) != null){
-            List<String> arg = new ArrayList<>();
-            if(line.contains(" ")){
-                arg = Arrays.asList(line.split(" "));
+            String pipetype = fp.contains(line, false, "greeting");
+            String pipeline = (String)fp.get("pipelines:" + pipetype);
+            if(pipeline == null){
+                System.out.println("Das habe ich nicht verstanden!");
+                continue;
             }
-            if(line.startsWith("read")){
-                String key = line.substring(5);
-                if(arg.get(1).equals("keys")){
-                    key = line.substring(10);
-                    System.out.println(fp.getKeys(key).toString());
-                } else {
-                    System.out.println(fp.get(key));
-                }
-            }
-            String pipeline = (String)fp.get("pipelines:greeting");
             String[] p = pipeline.split("-");
             String[] s = p[0].split(",");
             for(int i = 0; i < s.length; i++){
                 if(line.equalsIgnoreCase(s[i])){
-                    System.out.println(p[1]);
+                    String[] q = p[1].split(",");
+                    System.out.println(q[ThreadLocalRandom.current().nextInt(0, q.length)]);
                 }
             }
         }

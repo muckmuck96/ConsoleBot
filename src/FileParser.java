@@ -46,6 +46,24 @@ public class FileParser extends File {
         return keys;
     }
 
+    public String contains(String needle, boolean multiple, String returnOnNull) throws Exception{
+        BufferedReader br = new BufferedReader(new FileReader(new File(this.getPath())));
+        String line = "";
+        while((line = br.readLine()) != null){
+            String[] args = line.split(";");
+            String[] haystack = args[1].split("-");
+            if(haystack[0].contains(needle.toLowerCase())){
+                if(args[0].contains(":") && !multiple){
+                    String[] a = args[0].split(":");
+                    return a[a.length - 1];
+                }
+                return args[0];
+            }
+
+        }
+        return returnOnNull;
+    }
+
     public Object get(String key) throws Exception{
         BufferedReader br = new BufferedReader(new FileReader(new File(this.getPath())));
         String line = "";
